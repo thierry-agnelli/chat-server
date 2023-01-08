@@ -1,10 +1,7 @@
 const authentication = require("./middleware/authentification");
-const logger = require("morgan");
+
 
 module.exports = (io) => {
-    
-    // Logger
-    io.use(logger("dev"));
 
     // Middleware d'authentification
     authentication(io);
