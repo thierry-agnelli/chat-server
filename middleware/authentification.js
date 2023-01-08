@@ -1,9 +1,10 @@
-module.exports = io => {
 
+
+module.exports = io => {
     console.log("ready to Authentication");
 
     io.use((socket, next) => {
-        console.log("Authentication");
+        console.log("Authentication attempt");
         // get données
         const { username, password } = socket.handshake.auth;
 

@@ -1,11 +1,14 @@
 const authentication = require("./middleware/authentification");
+const logger = require("morgan");
 
 module.exports = (io) => {
-    console.log("App");
+    
+    // Logger
+    io.use(logger("dev"));
+
     // Middleware d'authentification
     authentication(io);
-    console.log("after");
-
+    
     // event connexion
     io.on("connection", (socket) => {
         console.log("New Challenger: " + socket.username + "!");
@@ -20,7 +23,7 @@ module.exports = (io) => {
 
         // ecoute event 
         socket.on("message", (data) => {
-            console.log("New message from :" + socket.username, ":", data.content);
+            console.log("New message from: " + socket.username, ":", data.content);
             socket.to("room1").emit("message", {
                 content: data.content,
                 username: socket.username
